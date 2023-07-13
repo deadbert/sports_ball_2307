@@ -16,15 +16,17 @@ class Team
   end
 
   def long_term_players
-    @roster.select do |player|
+    long_players = @roster.select do |player|
       player.contract_length > 24
     end
+    long_players.sort_by {|player| player.contract_length}
   end
 
   def short_term_players
-    @roster.select do |player|
+    short_players = @roster.select do |player|
       player.contract_length <= 24
     end
+    short_players.sort_by {|player| player.contract_length}
   end
 
   def total_value
@@ -39,4 +41,17 @@ class Team
       "player_count" => player_count
     }
   end
+
+  # def average_cost_of_player
+  #  format_cost(total_value / player_count)
+  # end
+
+  # def format_cost(cost)
+  #   cost_reverse_arr = []
+  #   cost.to_s.chars.reverse.each_slice(3) do |slice|
+  #     cost_reverse_arr << slice
+  #   end
+  #   require 'pry';binding.pry
+  #   cost_reverse_arr.reverse.join(',')
+  # end
 end
