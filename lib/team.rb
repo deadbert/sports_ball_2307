@@ -42,16 +42,28 @@ class Team
     }
   end
 
-  # def average_cost_of_player
-  #  format_cost(total_value / player_count)
-  # end
+  def average_cost_of_player
+   format_cost(total_value / player_count)
+  end
 
-  # def format_cost(cost)
-  #   cost_reverse_arr = []
-  #   cost.to_s.chars.reverse.each_slice(3) do |slice|
-  #     cost_reverse_arr << slice
-  #   end
-  #   require 'pry';binding.pry
-  #   cost_reverse_arr.reverse.join(',')
-  # end
+  def format_cost(cost)
+    cost_reverse_arr = []
+    cost.to_s.chars.reverse.each_slice(3) do |slice|
+      cost_reverse_arr << slice
+    end
+    cost_reverse_joined = []
+    cost_reverse_arr.each do |array|
+      cost_reverse_joined << array.join('')
+    end
+    final_cost_format = "$#{cost_reverse_joined.join(',').reverse}"
+  end
+
+  def players_by_last_name
+    players = []
+    @roster.each do |player|
+      players << player.last_name
+    end
+    players.sort!
+    players.join(', ')
+  end
 end
